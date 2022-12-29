@@ -1,7 +1,9 @@
 import register from "./register.validator.js";
+import update from "./update.validator.js";
 
 const Validators = {
-    register
+    register,
+    update
 }
 
 export default Validators;
