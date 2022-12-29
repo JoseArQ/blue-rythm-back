@@ -4,20 +4,21 @@ import {SALT_ROUND} from "../constants/crypt.js";
 
 const userRegisterController = async (req, res) => {
 
-    const { name, surname, email, password } = req.body;
+    const { name, surname, email, password, avatar } = req.body;
 
     const isEmailUserExist = await User.findOne({email});
     if (isEmailUserExist) return res.status(409).json({succes: false, message: "User email Already registered"});
 
     const hashedPasseword = await hash(password, SALT_ROUND);
-    console.log(hashedPasseword);
+
     const user = await User.create({
         name,
         surname,
         email,
-        password: hashedPasseword
+        password: hashedPasseword,
+        avatar
     });
-    console.log(user);
+
     res.json(
         {
             succes: true, 
