@@ -37,6 +37,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
         maxlength: 1024,
+    },
+    avatar: {
+        type: String
     }
 }, { _id: false });
 
@@ -47,6 +50,7 @@ userSchema.methods.generateAuthToken = function (){
             name: this.name,
             surname: this.surname,
             email: this.email,
+            avatar: this.avatar,
             exp: expiredDate(MINUTE)
         }, 
         JWT_PRIVATE_KEY
