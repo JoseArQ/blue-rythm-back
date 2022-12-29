@@ -2,6 +2,13 @@ import { Schema, model } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 import jwt from 'jsonwebtoken';
 
+import { JWT_PRIVATE_KEY } from '../constants/env.js';
+
+const MINUTE = 60;
+const expiredDate = (minute) => {
+    return Math.floor(Date.now()/1000) + (60 * minute);
+}
+
 const userSchema = new Schema({
     _id: {
         type: String,
@@ -40,11 +47,13 @@ userSchema.methods.generateAuthToken = function (){
             name: this.name,
             surname: this.surname,
             email: this.email,
+            exp: expiredDate(MINUTE)
         }, 
-        process.env.JWT_PRIVATE_KEY
+        JWT_PRIVATE_KEY
         );
     return token;
 }
+
 const User = model('User', userSchema);
 
 export default User;
