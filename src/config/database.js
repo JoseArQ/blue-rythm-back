@@ -1,6 +1,4 @@
-import {connect} from 'mongoose';
-
-// const MONGODB_URI = 'mongodb://localhost:27017/blue-rythm';
+import { connect } from 'mongoose';
 
 const connectDB = async (url) => {
     try {

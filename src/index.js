@@ -3,10 +3,10 @@ import './config/env.js';
 import httpServer from './config/httpServer.js';
 import connectDB from './config/database.js';
 
-import { PORT } from './constants/env.js';
+import { PORT, MONGODB_URI } from './constants/env.js';
 
 const bootstrap = async () => {
-    await connectDB(process.env.MONGODB_URI);
+    await connectDB(MONGODB_URI);
 
     httpServer.listen(
         PORT,
