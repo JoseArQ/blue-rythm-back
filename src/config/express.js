@@ -1,11 +1,13 @@
 import express from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
+import morgan from 'morgan';
+
 import userRouter from '../routes/user.routes.js';
 import searchRouter from '../routes/search.routes.js';
 
-import { SESSION_SECRET } from "../constants/env.js";
-import { MONGODB_URI } from "../constants/env.js";
+import { SESSION_SECRET, MONGODB_URI } from "../constants/env.js";
+import { MORGAN_FORMAT } from "../constants/morganSettings.js";
 
 const expressApp = express();
 
@@ -25,6 +27,7 @@ if (expressApp.get('env') === 'production') {
 // Midleware
 expressApp.use(express.json());
 expressApp.use(session(sess));
+expressApp.use(morgan(MORGAN_FORMAT));
 
 // Routes
 expressApp.use('/api/user', userRouter);
