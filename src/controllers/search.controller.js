@@ -146,7 +146,7 @@ const searchController = async (req, res) =>{
     if (error) return res.status(400).json(error);
 
     const url = encodeURI(`https://api.spotify.com/v1/search?${queryUrl}`);
-    console.log(url);
+    // console.log(url);
 
     // console.log(queryUrl);
     const tracksResponse = await searchItems(
