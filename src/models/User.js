@@ -1,4 +1,4 @@
-import { Schema, model } from "mongoose";
+import mongoose, { Schema, model } from "mongoose";
 import { v4 as uuidv4 } from "uuid";
 import jwt from 'jsonwebtoken';
 
@@ -12,7 +12,7 @@ const expiredDate = (minute) => {
 const userSchema = new Schema({
     _id: {
         type: String,
-        default: uuidv4(),
+        required: true
     },
     name: {
         type: String,
@@ -56,6 +56,10 @@ userSchema.methods.generateAuthToken = function (){
         JWT_PRIVATE_KEY
         );
     return token;
+}
+
+userSchema.statics.generateId = function (){
+    return uuidv4();
 }
 
 const User = model('User', userSchema);
