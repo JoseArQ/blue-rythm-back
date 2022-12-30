@@ -120,7 +120,6 @@ const extractInfo = (data, type) => {
             return {
                 artistId: artist.id,
                 name: artist.name,
-                artist: artist.name,// quitar
                 images: artist.images,
                 external_ref: artist.external_urls.spotify
             }
