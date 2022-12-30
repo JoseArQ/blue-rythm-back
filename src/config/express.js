@@ -6,7 +6,6 @@ import searchRouter from '../routes/search.routes.js';
 
 import { SESSION_SECRET } from "../constants/env.js";
 import { MONGODB_URI } from "../constants/env.js";
-import { cookie } from 'request';
 
 const expressApp = express();
 
