@@ -1,4 +1,4 @@
-import Song from "../models/Song.js";
+// import Song from "../models/Song.js";
 
 const songSaveController = async (req, res)=>{    
     // body -> data: [{name, songId, artist, album, preview, trackHref, albumImages}...]
@@ -14,9 +14,10 @@ const songSaveController = async (req, res)=>{
             });
     }
 
-    const songCreate = await Song.create(req.body.data);
-    console.log(req.body.data);
-    res.json(songCreate);
+    // const songCreate = await Song.create(req.body.data);
+    // console.log(req.body.data);
+    // res.json(songCreate);
+    res.send("OK!");
 }
 
 export default songSaveController;
