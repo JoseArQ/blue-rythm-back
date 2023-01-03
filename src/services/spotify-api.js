@@ -40,7 +40,26 @@ const checkToken = async function(token){
     return false;
   }
 }
+
+const getGenres = async (token) =>{
+  try {
+    const result = await axios.get(
+      'https://api.spotify.com/v1/recommendations/available-genre-seeds',
+      {
+        headers: {
+          'Authorization': 'Bearer ' + token,
+          'content-type': 'application/json',
+        }
+      }
+    )
+    return result?.data?.genres;
+  } catch (error) {
+    return error?.response?.data;
+  }
+}
+
 export{
   getToken,
-  checkToken
+  checkToken,
+  getGenres
 } 
