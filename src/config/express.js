@@ -6,6 +6,7 @@ import morgan from 'morgan';
 import userRouter from '../routes/user.routes.js';
 import searchRouter from '../routes/search.routes.js';
 import songsRouter from '../routes/songs.routes.js';
+import playListRouter from '../routes/playList.routes.js';
 
 import { SESSION_SECRET, MONGODB_URI } from "../constants/env.js";
 import { MORGAN_FORMAT } from "../constants/morganSettings.js";
@@ -34,5 +35,6 @@ expressApp.use(morgan(MORGAN_FORMAT));
 expressApp.use('/api/user', userRouter);
 expressApp.use('/api/search', searchRouter);
 expressApp.use('/api/songs', songsRouter);
+expressApp.use('/api/playList', playListRouter);
 
 export default expressApp;
