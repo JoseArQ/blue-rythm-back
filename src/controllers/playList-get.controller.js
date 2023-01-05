@@ -1,7 +1,11 @@
 import PlayList from '../models/PlayList.js';
 
 const searchPlayList = (query) => {
-    return PlayList.find(query);
+    return PlayList
+        .find(query)
+        .populate("userId", "name surname")
+        .populate("songs", "name artist preview")
+        .exec();
 }
 
 export const getPlayListController = async (req, res) => {
@@ -28,11 +32,14 @@ export const getPlayListController = async (req, res) => {
     )
 }
 
-export const getPlayListByNameController = async (req, res) => {
+export const getPlayListByIdController = async (req, res) => {
    
-    const { name } = req?.params;
-    // console.log(name);
-    const playLists = await searchPlayList({ name });
+    const { id } = req?.params;
+    
+    const playLists = await searchPlayList({ 
+        _id: id, 
+        isPublic: true 
+    });
     // console.log(playLists);
     if(!playLists.length){
         return res
