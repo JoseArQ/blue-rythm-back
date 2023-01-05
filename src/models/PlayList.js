@@ -11,7 +11,11 @@ const playListSchema = new mongoose.Schema({
             type: mongoose.Types.ObjectId,
             ref: "Song"
         }
-    ]
+    ],
+    isPublic: {
+        type: Boolean,
+        default: false
+    }
 });
 
 const PlayList = mongoose.model("PlayList", playListSchema);
