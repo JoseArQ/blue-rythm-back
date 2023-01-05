@@ -57,7 +57,7 @@ const getSongsId = async (songs) => {
 const playListController = async (req, res) => {
     // body -> name[string], songs[array] 
     const { user } = req;
-    const { name, songs} = req?.body;
+    const { name, songs, isPublic } = req?.body;
     
     if(!name || !songs){
         return res
@@ -73,7 +73,7 @@ const playListController = async (req, res) => {
     // console.log(songs);
     let playlist = await PlayList.findOne({ 
         userId:user._id,
-        name 
+        name    
     });
     // console.log(playlist);
     if (playlist) return res.status(400).json({ succes: false, error: {code: 106, message: `Play list '${name}' already exist`}})
@@ -84,11 +84,17 @@ const playListController = async (req, res) => {
     const songsId = await getSongsId(songsFormated);
     // console.log(songsId);
 
-    playlist = await PlayList.create({
+    let newPlayList = {
         name,
         userId: user._id,
-        songs: songsId
-    });
+        songs: songsId,
+    }
+
+    if (isPublic){
+        newPlayList.isPublic = isPublic;
+    }
+
+    playlist = await PlayList.create(newPlayList);
 
     // console.log(playlist);
     
