@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import morgan from 'morgan';
+import cors from 'cors';
 
 import userRouter from '../routes/user.routes.js';
 import searchRouter from '../routes/search.routes.js';
@@ -27,6 +28,7 @@ if (expressApp.get('env') === 'production') {
 }
 
 // Midleware
+expressApp.use(cors());
 expressApp.use(express.json());
 expressApp.use(session(sess));
 expressApp.use(morgan(MORGAN_FORMAT));
