@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken';
 
 import { JWT_PRIVATE_KEY } from '../constants/env.js';
 
-const MINUTE = 60;
+const MINUTE = 10080;
 const expiredDate = (minute) => {
     return Math.floor(Date.now()/1000) + (60 * minute);
 }
