@@ -6,7 +6,7 @@ import searchController from "../controllers/search.controller.js";
 
 const router = Router();
 
-router.get('/', auth, tokenVerify, searchController);
+router.post('/', auth, tokenVerify, searchController);
 
 
 export default router;
