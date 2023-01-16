@@ -4,7 +4,7 @@ const searchPlayList = (query) => {
     return PlayList
         .find(query)
         .populate("userId", "name surname")
-        .populate("songs", "name artist preview")
+        .populate("songs", "name artist preview albumImage")
         .exec();
 }
 

@@ -4,7 +4,7 @@ const getPublicPlayLists = () => {
     return PlayList
         .find({ isPublic: true })
         .populate("userId", "name surname")
-        .populate("songs", "name artist preview")
+        .populate("songs", "name artist preview albumImage")
         .exec()
 }
 
