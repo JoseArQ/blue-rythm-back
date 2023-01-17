@@ -59,7 +59,13 @@ const playListController = async (req, res) => {
     const { user } = req;
     const { name, songs, isPublic } = req?.body;
     
-    if(!name || !songs){
+    let newPlayList = {
+        name: null,
+        userId: user._id,
+        songs: []
+    };
+    
+    if(!name){
         return res
         .status(400)
         .json({
@@ -70,25 +76,37 @@ const playListController = async (req, res) => {
             }
         })
     }
+
     // console.log(songs);
     let playlist = await PlayList.findOne({ 
         userId:user._id,
         name    
     });
     // console.log(playlist);
-    if (playlist) return res.status(400).json({ succes: false, error: {code: 106, message: `Play list '${name}' already exist`}})
     
-    const songsFormated = await Promise.all(getSongs(req.session?.spotifyToken, songs));
-    // console.log(songsFormated);
-    
-    const songsId = await getSongsId(songsFormated);
-    // console.log(songsId);
-
-    let newPlayList = {
-        name,
-        userId: user._id,
-        songs: songsId,
+    if (playlist) {
+        return res
+            .status(400)
+            .json({ 
+                succes: false, 
+                error: {
+                    code: 106, 
+                    message: `Play list '${name}' already exist`
+                }
+            });
     }
+    
+    newPlayList.name = name;
+    
+    if (songs){
+        const songsFormated = await Promise.all(getSongs(req.session?.spotifyToken, songs));
+        // console.log(songsFormated);
+        
+        const songsId = await getSongsId(songsFormated);
+        // console.log(songsId);
+        newPlayList.songs = songsId;
+    }
+    
 
     if (isPublic){
         newPlayList.isPublic = isPublic;
