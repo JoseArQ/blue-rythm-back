@@ -11,11 +11,11 @@ import auth from "../middleware/auth.js";
 
 const playListRouter = Router();
 
-playListRouter.post("/", auth, tokenVerify, playListController);
+playListRouter.post("/", auth, tokenVerify, Validator('createPlaylist'), playListController);
 playListRouter.get("/", auth, getPlayListController);
 playListRouter.get("/publics", getPublicPlayListController);
 playListRouter.get("/:id", auth, getPlayListByIdController);
-playListRouter.patch("/:id", auth, tokenVerify, Validator('playlist'), updatePlayList);
+playListRouter.patch("/:id", auth, tokenVerify, Validator('updatePlaylist'), updatePlayList);
 playListRouter.delete("/:id", auth, playListRemoveController);
 
 export default playListRouter;
