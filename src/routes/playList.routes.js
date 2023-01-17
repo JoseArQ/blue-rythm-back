@@ -14,7 +14,7 @@ const playListRouter = Router();
 playListRouter.post("/", auth, tokenVerify, playListController);
 playListRouter.get("/", auth, getPlayListController);
 playListRouter.get("/publics", getPublicPlayListController);
-playListRouter.get("/:id", getPlayListByIdController);
+playListRouter.get("/:id", auth, getPlayListByIdController);
 playListRouter.patch("/:id", auth, tokenVerify, Validator('playlist'), updatePlayList);
 playListRouter.delete("/:id", auth, playListRemoveController);
 
